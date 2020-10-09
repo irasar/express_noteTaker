@@ -1,6 +1,6 @@
 const { response } = require("express");
 const path = require("path");
-const express = require("express");
+var express = require("express");
 
 const uuid = require("uuid");
 var app = express();
@@ -13,7 +13,7 @@ store
 .read()
 .then((notes) => response.json(notes))
 .catch((err) => res.status(500).json(err));
-    });
+});
 
 // POST route
 app.post("/api/notes", function(req, res){
@@ -29,7 +29,7 @@ app.delete("/api/notes/:id", function(req, res) {
     store
     .delete(req.params.id)
     .then(() => response.json(notes))
-})
+}}
 
 
 
