@@ -6,7 +6,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "../db");
 outputPath = path.join(OUTPUT_DIR, "db.json");
 // var notes = require("../db/db.json");
 //empty arrays to put note data into
-let noteArray = [];
+let notesArray = [];
 let savedNotes = [];
 //sets a a variable to be exported equal to the return of a function
 module.exports = function (app) {
@@ -29,12 +29,13 @@ module.exports = function (app) {
         });
     });
     //selects the notes file and created a function
-    app.post("/api/notes"), function (req, res) {
+    app.post("/api/notes", function (req, res) {
         //entered array for scope purposes
         notesArray = [];
         notesArray.push(req.body);
+        console.log(req.body);
         //reads the outputPath value (db.json) in english
-        fs.readFile(outputPath, 'utf8', (err, data) => {
+        fs.readFile(outputPath, 'utf-8', (err, data) => {
             if (err) throw err;
             //parses the value of the returned data into a variable called data
             data = JSON.parse(data);
@@ -43,11 +44,9 @@ module.exports = function (app) {
                 notesArray.push(data[i])
             }
             //tells the browser to scan through the notes array and add 1 to the value of each returned item's index and set's it id tothat value
-            for (let i = 0; i < notesArray.length; index++) {
+            for (let i = 0; i < notesArray.length; i++) {
                 notesArray[i].id = i + 1;
             }
-            //console logs the notes array
-            console.log(notesArray);
             //exports it
             res.send(notesArray);
             console.log(notesArray);
@@ -61,21 +60,35 @@ module.exports = function (app) {
             })
         });
     }
+    )
     //write code to empty array
     app.delete("/api/notes/:id", function (req, res) {
-        notesArray = [];
-        let noteId = req.params.id;
-        console.log(noteId);
-        fs.readFile(outputPath, "utf8", (err, data) => {
+    //empties the notes array
+    notesArray = [];
+    // sets the value of a variable
+    let noteId = req.params.id;
+    console.log(noteId);
+    fs.readFile(outputPath, "utf8", (err, data) => {
+        if (err) throw err;
+        notesArray = JSON.parse(data);
+        const newNotesArray = notesArray.filter(note => note.id != noteId);
+        console.log(newNotesArray);
+        fs.writeFile(outputPath, JSON.stringify(newNotesArray) + "\t", err => {
             if (err) throw err;
-            notesArray = JSON.parse(data);
-            const newNotesArray = notesArray.filter(note => note.id != noteId);
-            console.log(newNotesArray);
-            fs.writeFile(outputPath, JSON.stringify(newNotesArray) + "\t", err => {
-                if (err) throw err;
-                console.log("deleted");
-                res.send(newNotesArray)
-            })
+            console.log("deleted");
+            res.send(newNotesArray)
         })
+    })
     });
 }
+
+
+
+
+
+
+
+
+
+
+

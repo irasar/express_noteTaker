@@ -20,20 +20,25 @@ If you need an example of a good README, check out [the VSCode repository](https
 
 If your README is very long, add a table of contents to make it easy for users to find what they need.
 
+
+* [Contributing](#contributing)
+* [Tests](#tests)
 * [Installation](#installation)
 * [Usage](#usage)
-* [Credits](#credits)
 * [License](#license)
+* [Description](#description)
+
 
 
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
 
+To install use the following command:<br>
+<pre><code>npm i</pre></code>
 
 ## Usage 
 
-Provide instructions and examples for use. Include screenshots as needed. 
+Run: <pre><code>node app.js</pre></code><br>
 
 
 ## Credits
@@ -48,8 +53,7 @@ If you followed tutorials, include links to those here as well.
 
 ## License
 
-The last section of a good README is a license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, use [https://choosealicense.com/](https://choosealicense.com/)
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
 
@@ -64,7 +68,7 @@ Badges aren't _necessary_, per se, but they demonstrate street cred. Badges let 
 
 ## Contributing
 
-If you created an application or package and would like other developers to contribute it, you will want to add guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own.
+Contributions in the form of issues and pull requests are welcomed and encouraged.
 
 ## Tests
 
