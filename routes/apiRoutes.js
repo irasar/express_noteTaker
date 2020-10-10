@@ -1,35 +1,48 @@
-const { response } = require("express");
 const path = require("path");
-var express = require("express");
+const OUTPUT_DIR = path.resolve(__dirname, "../db");
+const outputPath = path.join(OUTPUT_DIR, "db.json");
+const fs = require("fs");
 
-const uuid = require("uuid");
-var app = express();
-const store = require("../db/store");
-const notes = require("../db/db.json");
+
+let notesArray = [];
+let savedNotes = [];
+
+module.exports = function(app) {
+
+    app.get("/api/notes", function (req, res) {
+        savedNotes = [];
+        fs.readFile(outputPath, 'utf-8', (err, data) => {
+if (err) throw err;
+data = JSON.parse(data)
+for (i = 0; i < data.length; i++) {
+    savedNotes.push(data[i])
+}
+res.send(savedNotes);
+    });
+});
+
+
 //GET route
 module.exports = function (app){
     app.get("/api/notes", function (req, res) {
-store
-.read()
-.then((notes) => response.json(notes))
-.catch((err) => res.status(500).json(err));
-});
+
 
 // POST route
 app.post("/api/notes", function(req, res){
-    req.body.id = uuid.v1();
+    // req.body.id = uuid.v1();
     //passed the data from the request to the class method
-    store
-    .addnote(req.body)
-    .then((note) => response.json(note))
-    .catch((err) => res.status(500).json(err));
-});
+    // store
+    // .addnote(req.body)
+    // .then((note) => response.json(note))
+    // .catch((err) => res.status(500).json(err));
+    console.log(req);
+})};
 // DELETE route
-app.delete("/api/notes/:id", function(req, res) {
-    store
-    .delete(req.params.id)
-    .then(() => response.json(notes))
-}}
+// app.delete("/api/notes/:id", function(req, res) {
+//     store
+//     .delete(req.params.id)
+//     .then(() => response.json(notes))
+// }}
 
 
 
