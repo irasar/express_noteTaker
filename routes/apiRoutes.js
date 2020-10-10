@@ -4,7 +4,6 @@ const fs = require('fs');
 //path requirements
 const OUTPUT_DIR = path.resolve(__dirname, "../db");
 outputPath = path.join(OUTPUT_DIR, "db.json");
-// var notes = require("../db/db.json");
 //empty arrays to put note data into
 let notesArray = [];
 let savedNotes = [];
@@ -14,7 +13,7 @@ module.exports = function (app) {
     app.get("/api/notes", function (req, res) {
         //adding the array within the function (for scope purposed)
         savedNotes = [];
-        //reads the data from the db.json file in human english
+        //reads the data from the db.json file in english
         fs.readFile(outputPath, 'utf8', (err, data) => {
             if (err) throw err;
             //if no err occurs, takes read result and stores it as the value of a variable called data
