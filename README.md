@@ -1,5 +1,6 @@
 # express_noteTaker
 
+https://note-taker-express1.herokuapp.com/
 
 ## Description 
 
@@ -27,7 +28,7 @@ To install use the following command:<br>
 ## Usage 
 
 Run: <pre><code>node app.js</pre></code><br>
-https://note-taker-express1.herokuapp.com/
+
 
 ## Credits
 
